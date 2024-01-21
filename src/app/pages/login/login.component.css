@@ -1,0 +1,49 @@
+/* login.component.css */
+.login-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-card {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.477);
+  border-radius: 10px;
+}
+
+.login-header {
+  display: flex;
+  justify-content: center;
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #dcdcdc;
+  margin-bottom: 10px;
+  text-align: center !important;
+}
+
+.login-field {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+button {
+  width: 100%;
+}
+
+.google-login-button {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.google-icon {
+  width: 24px; /* Ajuste o tamanho conforme necessário */
+  margin-right: 8px;
+  vertical-align: middle;
+}

@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1705845570222,
+  "timestamp": 1705856344868,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/chunk-BURW4M7Z.js",
         "/favicon.ico",
         "/index.html",
-        "/main-XSHKGUFV.js",
+        "/main-MLUKBRBX.js",
         "/manifest.webmanifest",
         "/polyfills-LZBJRJJE.js",
         "/styles-X7BJKXHN.css"
@@ -38,7 +38,8 @@
         "/assets/icons/icon-384x384.png",
         "/assets/icons/icon-512x512.png",
         "/assets/icons/icon-72x72.png",
-        "/assets/icons/icon-96x96.png"
+        "/assets/icons/icon-96x96.png",
+        "/assets/person-learning.jpg"
       ],
       "patterns": []
     }
@@ -54,11 +55,12 @@
     "/assets/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/assets/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/assets/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "/assets/person-learning.jpg": "76b7571909806a9f6b4104814265df5eeac815fc",
     "/chunk-44OSUXMY.js": "55e7f5646c37a929dd6b334be29e4774fc54ffd4",
     "/chunk-BURW4M7Z.js": "0551b731dd8aa5b034e6c30b11c89e09c93a0db0",
     "/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
-    "/index.html": "9a5542874c160c080e5335470f5b9639715e4f69",
-    "/main-XSHKGUFV.js": "52e16ce646898270db8519b3741922efc000f81a",
+    "/index.html": "de45cfd26c5d28ef3f901e7cd6073378a862f4b9",
+    "/main-MLUKBRBX.js": "31818e5cff9f17b2f9ae99ebbdc83a387f569c79",
     "/manifest.webmanifest": "3e402946095bfcdc1c178c3bb624506096aecc5c",
     "/polyfills-LZBJRJJE.js": "fda1c82c5c620f1fa442f687b3df45a037f6fcc9",
     "/styles-X7BJKXHN.css": "2f55b7560ad2a74bb01b933c5edbb3c02a3a270c"

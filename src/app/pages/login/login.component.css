@@ -1,43 +1,29 @@
-/* login.component.css */
-.login-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
-.login-card {
-  max-width: 400px;
-  width: 100%;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.477);
-  border-radius: 10px;
-}
-
-.login-header {
-  display: flex;
-  justify-content: center;
-}
-
-.login-title {
-  font-size: 24px;
-  font-weight: bold;
+* {
   color: #dcdcdc;
-  margin-bottom: 10px;
-  text-align: center !important;
 }
 
-.login-field {
-  width: 100%;
-  margin-bottom: 8px;
+.landing-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
 }
 
-button {
+.landing-page-content {
+  text-align: center;
+}
+
+.landing-page-image {
   width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
 
 .google-login-button {
-  margin-top: 16px;
   display: flex;
   align-items: center;
 }

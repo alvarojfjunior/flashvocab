@@ -16,12 +16,27 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ListDeckComponent } from './components/list-deck/list-deck.component';
 import { MainComponent } from './pages/private/main/main.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddCardComponent } from './components/add-card/add-card.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SpinnerComponent, MainComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    SpinnerComponent,
+    ListDeckComponent,
+    MainComponent,
+    DashboardComponent,
+    AddCardComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,6 +46,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ToastrModule.forRoot(),
     MatSlideToggleModule,
     MatInputModule,
+    MatDialogModule,
     MatButton,
     MatButtonModule,
     MatSelectModule,
@@ -43,8 +59,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   exports: [SpinnerComponent],
   providers: [],

@@ -1,0 +1,12 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}

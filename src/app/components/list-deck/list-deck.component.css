@@ -1,0 +1,50 @@
+.main-container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.477);
+  border-radius: 20px;
+  color: #dcdcdc;
+  height: 450px;
+  width: 300px;
+  padding-block: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.seach-field {
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.list-btn {
+  cursor: pointer;
+
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.item span {
+  display: inline-block;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.fab-button {
+  position: relative;
+  bottom: -220px;
+  right: -260px;
+}
+
+

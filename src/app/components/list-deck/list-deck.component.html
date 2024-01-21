@@ -1,0 +1,39 @@
+<div class="main-container">
+  <h1> Your Cards </h1>
+
+  <mat-form-field class="seach-field">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput placeholder="Find a card">
+  </mat-form-field>
+
+  <div class="list">
+    <div class="item">
+      <span>
+        Aviod
+      </span>
+      <div>
+        <mat-icon matPrefix class="list-btn">edit</mat-icon>
+        <mat-icon matPrefix class="list-btn">delete</mat-icon>
+      </div>
+    </div>
+
+
+    <div class="item">
+      <span>
+        I want to break free
+      </span>
+      <div>
+        <mat-icon matPrefix class="list-btn">edit</mat-icon>
+        <mat-icon matPrefix class="list-btn">delete</mat-icon>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <button (click)="openAddDialog()" mat-fab color="primary" aria-label="Add a card into your deck" class="fab-button"  >
+    <mat-icon>add</mat-icon>
+  </button>
+
+</div>

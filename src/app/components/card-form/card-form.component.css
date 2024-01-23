@@ -1,4 +1,4 @@
-s.form {
+.form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,4 +31,12 @@ s.form {
 
 button {
   width: 100%;
+}
+
+
+/* Media query para telas menores (ex: dispositivos móveis) */
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 14px; /* Estilos diferentes para telas menores */
+  }
 }

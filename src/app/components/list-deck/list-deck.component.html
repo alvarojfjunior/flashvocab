@@ -3,36 +3,26 @@
 
   <mat-form-field class="seach-field">
     <mat-icon matPrefix>search</mat-icon>
-    <input matInput placeholder="Find a card">
+    <input matInput placeholder="Find a card" (input)="filter($event)">
   </mat-form-field>
 
   <div class="list">
-    <div class="item">
-      <span>
-        Aviod
-      </span>
-      <div>
-        <mat-icon matPrefix class="list-btn">edit</mat-icon>
-        <mat-icon matPrefix class="list-btn">delete</mat-icon>
+
+    <div *ngFor="let card of cards$ | async;">
+      <div class="item">
+        <span>
+          {{card.ask}}
+        </span>
+        <div>
+          <mat-icon matPrefix class="list-btn" (click)="handleEdit(card)">edit</mat-icon>
+          <mat-icon matPrefix class="list-btn" (click)="handleDelete(card)">delete</mat-icon>
+        </div>
       </div>
     </div>
-
-
-    <div class="item">
-      <span>
-        I want to break free
-      </span>
-      <div>
-        <mat-icon matPrefix class="list-btn">edit</mat-icon>
-        <mat-icon matPrefix class="list-btn">delete</mat-icon>
-      </div>
-    </div>
-
-
   </div>
 
 
-  <button (click)="openAddDialog()" mat-fab color="primary" aria-label="Add a card into your deck" class="fab-button"  >
+  <button (click)="openAddDialog()" mat-fab color="primary" aria-label="Add a card into your deck" class="fab-button">
     <mat-icon>add</mat-icon>
   </button>
 

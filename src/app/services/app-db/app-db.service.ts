@@ -1,5 +1,6 @@
 // db.ts
 import Dexie, { Table } from 'dexie';
+import { BehaviorSubject } from 'rxjs';
 
 export interface Deck {
   id?: number;
@@ -9,6 +10,7 @@ export interface Deck {
 
 export class AppDbService extends Dexie {
   deck!: Table<Deck, number>;
+  searchTermSubject = new BehaviorSubject<string>('');
 
   constructor() {
     super('appDB');
@@ -24,6 +26,7 @@ export class AppDbService extends Dexie {
       answer: 'Flash Vocab is amazing!',
     });
   }
+
 }
 
 export const db = new AppDbService();

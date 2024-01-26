@@ -39,9 +39,9 @@ export class AddCardComponent {
 
       if (this.isEdditing) {
         await db.deck.update(this.data.id, this.form.value);
-        this.dialogRef.close()
+        this.dialogRef.close();
       } else {
-        await db.deck.add(this.form.value);
+        await db.deck.add({ ...this.form.value, score: 0 });
         this.form.reset();
       }
 
@@ -50,5 +50,7 @@ export class AddCardComponent {
     } else {
       this.toastr.error('Error!', 'Something wrong happened!');
     }
+
+    db.searchTermSubject.next('');
   }
 }

@@ -1,5 +1,5 @@
 import { NgModule, isDevMode } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -28,6 +28,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddCardComponent } from './components/card-form/card-form.component';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
+import { SwipeCardsComponent } from './components/swipe-cards/swipe-cards.component';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
+
 
 @NgModule({
   declarations: [
@@ -39,9 +42,11 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
     DashboardComponent,
     AddCardComponent,
     DialogConfirmComponent,
+    SwipeCardsComponent,
   ],
   imports: [
     BrowserModule,
+    HammerModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

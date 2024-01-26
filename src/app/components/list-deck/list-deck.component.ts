@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCardComponent } from '../card-form/card-form.component';
-import { liveQuery } from 'dexie';
 import { Deck, db } from '../../services/app-db/app-db.service';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
 import {
@@ -19,9 +18,9 @@ import {
   styleUrls: ['./list-deck.component.css'],
 })
 export class ListDeckComponent implements OnInit {
-  private searchTermSubject = new BehaviorSubject<string>('');
-  searchTerm$ = this.searchTermSubject.asObservable();
   cards$: Observable<Deck[]> | undefined;
+
+  searchTerm$ = db.searchTermSubject.asObservable();
 
   constructor(public dialog: MatDialog) {}
 
@@ -34,11 +33,7 @@ export class ListDeckComponent implements OnInit {
   }
 
   filter(event: any) {
-    this.searchTermSubject.next(event.target.value);
-  }
-
-  private getFilteredCards(searchTerm: string): Promise<Deck[]> {
-    return db.deck.where('ask').startsWithIgnoreCase(searchTerm).toArray();
+    db.searchTermSubject.next(event.target.value);
   }
 
   identifyList(index: number, list: Deck) {
@@ -56,7 +51,10 @@ export class ListDeckComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogConfirmComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) db.deck.delete(data.id);
+      if (result) {
+        db.deck.delete(data.id);
+        db.searchTermSubject.next('');
+      }
     });
   }
 
@@ -64,5 +62,9 @@ export class ListDeckComponent implements OnInit {
     this.dialog.open(AddCardComponent, {
       width: '350px',
     });
+  }
+
+  getFilteredCards(searchTerm: string): Promise<Deck[]> {
+    return db.deck.where('ask').startsWithIgnoreCase(searchTerm).toArray();
   }
 }

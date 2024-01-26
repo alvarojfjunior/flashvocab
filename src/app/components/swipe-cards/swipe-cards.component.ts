@@ -23,9 +23,13 @@ export class SwipeCardsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectNextCard();
+    this.cards$.subscribe((cards) => {
+      const others = cards.filter((c) => c.ask !== this.card.ask);
+      const theNextOne = others[Math.floor(Math.random() * others.length)];
+      this.card = theNextOne;
+      this.swipeDirection = null;
+    });
   }
-
 
   async onPan(event: any) {
     if (event.isFinal) {
@@ -38,23 +42,13 @@ export class SwipeCardsComponent implements OnInit {
 
   async handleCardSwipe() {
     if (this.swipeDirection === 'left') {
-      await db.deck.update(this.card.id as number, { score: this.card.score -1 });
+      await db.deck.update(this.card.id as number, {
+        score: this.card.score - 1,
+      });
     } else if (this.swipeDirection === 'right') {
-      await db.deck.update(this.card.id as number, { score: this.card.score +1 });
+      await db.deck.update(this.card.id as number, {
+        score: this.card.score + 1,
+      });
     }
-
-    this.selectNextCard();
-  }
-
-  selectNextCard() {
-    this.cards$.subscribe((cards) => {
-      const others = cards.filter(c => c.ask !== this.card.ask);
-
-      const theNextOne = others[Math.floor(Math.random() * others.length)]
-
-      this.card = theNextOne
-
-      this.swipeDirection = null;
-    });
   }
 }

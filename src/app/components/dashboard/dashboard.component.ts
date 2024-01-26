@@ -14,6 +14,7 @@ export class DashboardComponent {
   openAddDialog() {
     this.dialog.open(SwipeCardsComponent, {
       width: '350px',
+      height: '450px',
     });
   }
 }

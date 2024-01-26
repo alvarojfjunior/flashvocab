@@ -6,6 +6,7 @@ export interface Deck {
   id?: number;
   ask: string;
   answer: string;
+  score: number;
 }
 
 export class AppDbService extends Dexie {
@@ -24,6 +25,7 @@ export class AppDbService extends Dexie {
     return await db.deck.add({
       ask: "It is your first card",
       answer: 'Flash Vocab is amazing!',
+      score: 0
     });
   }
 

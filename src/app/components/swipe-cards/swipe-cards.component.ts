@@ -1,43 +1,60 @@
 // src/app/swipe-cards/swipe-cards.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { liveQuery } from 'dexie';
+import { Deck, db } from '../../services/app-db/app-db.service';
 
 @Component({
   selector: 'app-swipe-cards',
   templateUrl: './swipe-cards.component.html',
-  styleUrls: ['./swipe-cards.component.css']
+  styleUrls: ['./swipe-cards.component.css'],
 })
-export class SwipeCardsComponent {
-  cards = [
-    { name: 'Card 1', description: 'Description 1', imageUrl: 'url_to_your_image1.jpg' },
-    { name: 'Card 2', description: 'Description 2', imageUrl: 'url_to_your_image2.jpg' },
-    { name: 'Card 3', description: 'Description 3', imageUrl: 'url_to_your_image2.jpg' },
-    { name: 'Card 4', description: 'Description 4', imageUrl: 'url_to_your_image2.jpg' },
-  ];
-
-  card = { name: 'Card 1', description: 'Description 1', imageUrl: 'url_to_your_image1.jpg' };
-
+export class SwipeCardsComponent implements OnInit {
+  cards$ = liveQuery(() => db.deck.toArray());
+  card: Deck;
   swipeDirection: string | null = null;
-  currentIndex: number = 0;
 
-  onPan(event: any): void {
+  constructor() {
+    this.card = {
+      id: 0,
+      answer: '',
+      ask: '',
+      score: 0,
+    };
+  }
+
+  ngOnInit(): void {
+    this.selectNextCard();
+  }
+
+
+  async onPan(event: any) {
     if (event.isFinal) {
-      this.handleCardSwipe();
+      await this.handleCardSwipe();
       return;
     }
     const x = event.deltaX;
     this.swipeDirection = x < 0 ? 'left' : 'right';
   }
 
-  private handleCardSwipe(): void {
+  async handleCardSwipe() {
     if (this.swipeDirection === 'left') {
-
+      await db.deck.update(this.card.id as number, { score: this.card.score -1 });
     } else if (this.swipeDirection === 'right') {
-
-
+      await db.deck.update(this.card.id as number, { score: this.card.score +1 });
     }
 
-    this.currentIndex = Math.min(this.currentIndex + 1, this.cards.length - 1);
-    this.card = this.cards[this.currentIndex]
-    this.swipeDirection = null;
+    this.selectNextCard();
+  }
+
+  selectNextCard() {
+    this.cards$.subscribe((cards) => {
+      const others = cards.filter(c => c.ask !== this.card.ask);
+
+      const theNextOne = others[Math.floor(Math.random() * others.length)]
+
+      this.card = theNextOne
+
+      this.swipeDirection = null;
+    });
   }
 }

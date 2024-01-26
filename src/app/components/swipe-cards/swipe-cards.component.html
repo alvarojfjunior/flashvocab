@@ -1,9 +1,8 @@
 <div class="swipe-container" (pan)="onPan($event)">
   <div class="card" [ngClass]="{'swipe-left': swipeDirection === 'left', 'swipe-right': swipeDirection === 'right'}">
-    <img [src]="card.imageUrl" alt="{{ card.name }}">
     <div class="card-info">
-      <h2>{{ card.name }}</h2>
-      <p>{{ card.description }}</p>
+      <h2>{{ card.ask }}</h2>
+      <p>{{ card.answer }}</p>
     </div>
   </div>
 </div>

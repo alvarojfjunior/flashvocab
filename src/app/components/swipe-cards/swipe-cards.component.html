@@ -1,8 +1,27 @@
 <div class="swipe-container" (pan)="onPan($event)">
-  <div class="card" [ngClass]="{'swipe-left': swipeDirection === 'left', 'swipe-right': swipeDirection === 'right'}">
+
+
+  <div class="card" [class.flipped]="isFlipped" (click)="toggleFlip()" [ngClass]="{'swipe-left': swipeDirection === 'left', 'swipe-right': swipeDirection === 'right'}">
     <div class="card-info">
-      <h2>{{ card.ask }}</h2>
-      <p>{{ card.answer }}</p>
+
+      <div class=" front">
+        <h2>{{ card.ask }}</h2>
+
+        <!-- <audio controls>
+          <source [src]="audioSrc" type="audio/mp3">
+          Seu navegador não suporta a tag de áudio.
+        </audio>
+        <button *ngIf="audioSrc" class="playPauseButton" (click)="toggleAudio()">
+          {{ isPlaying ? 'Pause' : 'Play' }}
+        </button> -->
+
+      </div>
+
+      <div class="back">
+        {{ card.answer }}
+      </div>
     </div>
   </div>
+
+
 </div>

@@ -30,6 +30,7 @@ import { AddCardComponent } from './components/card-form/card-form.component';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { SwipeCardsComponent } from './components/swipe-cards/swipe-cards.component';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { BrowserModule, HammerModule } from '@angular/platform-browser';
     AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     ToastrModule.forRoot(),
     MatSlideToggleModule,
     MatInputModule,

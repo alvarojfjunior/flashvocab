@@ -11,6 +11,19 @@ h1 {
   text-align: center;
 }
 
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-button {
+  height: 57px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid #ccccccab;
+
+}
+
 .seach-field {
   width: 100%;
 }

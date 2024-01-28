@@ -1,10 +1,17 @@
 <div class="main-container">
   <h1> Your Cards </h1>
 
-  <mat-form-field class="seach-field">
-    <mat-icon matPrefix>search</mat-icon>
-    <input matInput placeholder="Find a card" (input)="filter($event)">
-  </mat-form-field>
+  <div class="list-header">
+    <mat-form-field class="seach-field">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Find a card" (input)="filter($event)">
+    </mat-form-field>
+
+    <button (click)="openAddDialog()" mat-button color="primary" aria-label="Add a card into your deck" class="new-button">
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </div>
 
   <div class="list">
 
@@ -20,10 +27,4 @@
       </div>
     </div>
   </div>
-
-
-  <button (click)="openAddDialog()" mat-fab color="primary" aria-label="Add a card into your deck" class="fab-button">
-    <mat-icon>add</mat-icon>
-  </button>
-
 </div>

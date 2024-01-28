@@ -1,9 +1,9 @@
-/* src/app/swipe-cards/swipe-cards.component.css */
 .swipe-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden !important;
 }
 
 .card {
@@ -11,10 +11,10 @@
   width: 300px;
   height: 400px;
   border-radius: 8px;
-  overflow: hidden;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   background-color: white;
   transition: transform 0.3s;
+  overflow: hidden !important;
 }
 
 .card img {

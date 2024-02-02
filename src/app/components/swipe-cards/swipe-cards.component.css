@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: transparent;
 }
 
 .card {
@@ -18,26 +19,15 @@
   cursor: pointer;
 }
 
-.front,
-.back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
+.card-content {
+  height: 380px;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  color: #000; /* Texto preto */
-}
-
-.front {
-  z-index: 2;
-}
-
-.back {
-  transform: rotateY(180deg);
-  z-index: 1;
+  font-size: 20px;
+  font-weight: bold;
+  color: #404040;
 }
 
 .card.flipped {
@@ -46,6 +36,17 @@
 
 .card .card-info {
   padding: 10px;
+}
+
+
+.swipe-left {
+  background-color: rgba(255, 83, 83, 0.34);
+  transform: translateX(-150%) rotate(-15deg);
+}
+
+.swipe-right {
+  background-color: rgba(83, 255, 83, 0.34);
+  transform: translateX(150%) rotate(15deg);
 }
 
 .playPauseButton {
@@ -57,10 +58,10 @@
   padding: 0;
 }
 
-.swipe-left {
-  transform: translateX(-150%) rotate(-15deg);
+.glassed {
+  transform: rotateY(180deg);
 }
 
-.swipe-right {
-  transform: translateX(150%) rotate(15deg);
+.hidden {
+  visibility: hidden;
 }

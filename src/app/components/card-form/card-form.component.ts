@@ -41,7 +41,7 @@ export class AddCardComponent {
         await db.deck.update(this.data.id, this.form.value);
         this.dialogRef.close();
       } else {
-        await db.deck.add({ ...this.form.value, score: 0 });
+        await db.deck.add({ ...this.form.value, score: 0, lastAccessed: new Date(), attempts: 0 });
         this.form.reset();
       }
 

@@ -19,9 +19,10 @@ h1 {
 
 .new-button {
   height: 57px;
-  margin-bottom: 22px;
+  margin-bottom: 23px;
   border-bottom: 1px solid #ccccccab;
-
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .seach-field {

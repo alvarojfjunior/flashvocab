@@ -1,27 +1,12 @@
-<div class="swipe-container" (pan)="onPan($event)">
-
-
-  <div class="card" [class.flipped]="isFlipped" (click)="toggleFlip()" [ngClass]="{'swipe-left': swipeDirection === 'left', 'swipe-right': swipeDirection === 'right'}">
+<div mat-dialog-content class="mat-typography swipe-container" (pan)="onPan($event)">
+  <div class="card" [class.flipped]="isFlipped" (click)="toggleFlip()"
+    [ngClass]="{'swipe-left': swipeDirection === 'left', 'swipe-right': swipeDirection === 'right'}">
     <div class="card-info">
-
-      <div class=" front">
-        <h2>{{ card.ask }}</h2>
-
-        <!-- <audio controls>
-          <source [src]="audioSrc" type="audio/mp3">
-          Seu navegador não suporta a tag de áudio.
-        </audio>
-        <button *ngIf="audioSrc" class="playPauseButton" (click)="toggleAudio()">
-          {{ isPlaying ? 'Pause' : 'Play' }}
-        </button> -->
-
-      </div>
-
-      <div class="back">
-        {{ card.answer }}
+      <div class="card-content">
+        <div style="text-align: center;">
+          <p [ngClass]="{'glassed' : isFlipped}">{{ isFlipped ? card.answer : card.ask }}</p>
+          <button (click)="play()" class="playPauseButton" [ngClass]="{'hidden' : isFlipped}">Play</button>
+        </div>
       </div>
     </div>
   </div>
-
-
-</div>

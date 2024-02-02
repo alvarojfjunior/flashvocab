@@ -7,7 +7,7 @@ import { db } from '../../services/app-db/app-db.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
   cards$ = liveQuery(() => db.deck.toArray());
@@ -15,18 +15,15 @@ export class DashboardComponent {
   learned = 0;
 
   constructor(public dialog: MatDialog) {
-
-    this.cards$.subscribe(cards => {
-      this.toLearn = cards.filter(c => c.score < 10).length
-      this.learned = cards.filter(c => c.score >= 10).length
-    })
+    this.cards$.subscribe((cards) => {
+      this.toLearn = cards.filter((c) => c.score < 10).length;
+      this.learned = cards.filter((c) => c.score >= 10).length;
+    });
   }
-
 
   openAddDialog() {
     this.dialog.open(SwipeCardsComponent, {
-      width: '350px',
-      height: '450px',
+      width:'100%',
     });
   }
 }

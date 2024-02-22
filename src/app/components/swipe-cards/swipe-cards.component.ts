@@ -2,14 +2,12 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { liveQuery } from 'dexie';
 import { Deck, db } from '../../services/app-db/app-db.service';
-import Speech from 'speak-tts';
 
 @Component({
   selector: 'app-swipe-cards',
   templateUrl: './swipe-cards.component.html',
   styleUrls: ['./swipe-cards.component.css'],
 })
-
 export class SwipeCardsComponent implements OnInit {
   cards$ = liveQuery(() => db.deck.toArray());
   card: Deck;
@@ -17,8 +15,6 @@ export class SwipeCardsComponent implements OnInit {
   isFlipped = false;
   isDraggingLeft: boolean = false;
   isDraggingRight: boolean = false;
-
-  private speech: any;
 
   constructor(private renderer: Renderer2, private el: ElementRef) {
     this.card = {
@@ -29,18 +25,6 @@ export class SwipeCardsComponent implements OnInit {
       lastAccessed: new Date(),
       attempts: 0,
     };
-
-    this.speech = new Speech();
-    if (this.speech.hasBrowserSupport()) {
-      this.speech.init();
-    }
-  }
-
-  play() {
-    this.speech.speak({
-      text: this.card.ask,
-      queue: false,
-    });
   }
 
   ngOnInit(): void {
@@ -49,15 +33,39 @@ export class SwipeCardsComponent implements OnInit {
 
   nextCard() {
     this.cards$.subscribe((cards) => {
-      const others = cards.filter((c) => c.ask !== this.card.ask);
-      const theNextOne = others[Math.floor(Math.random() * others.length)];
+      const theNextOne = this.getNextCard(cards);
       this.card = theNextOne;
       this.swipeDirection = null;
     });
   }
 
+  getNextCard(cards: Deck[]): Deck {
+    const others = cards.filter((c) => c.ask !== this.card.ask);
+
+    // Calcula o total de tentativas dos cards restantes
+    const totalAttempts = others.reduce((acc, card) => acc + card.attempts, 0);
+
+    // Calcula a probabilidade de selecionar cada card com base no número de tentativas
+    const probabilities = others.map((card) => card.attempts / totalAttempts);
+
+    // Gera um número aleatório entre 0 e 1
+    const randomNum = Math.random();
+
+    // Seleciona um card com base nas probabilidades calculadas
+    let cumulativeProbability = 0;
+    for (let i = 0; i < others.length; i++) {
+      cumulativeProbability += probabilities[i];
+      if (randomNum <= cumulativeProbability) {
+        return others[i];
+      }
+    }
+
+    // Se ocorrer algum problema, retorna o primeiro card disponível
+    return others[0];
+  }
+
   async onSwipe(swipeDirection: 'left' | 'right') {
-    this.showAnimation(swipeDirection)
+    this.showAnimation(swipeDirection);
 
     if (swipeDirection === 'left') {
       this.isDraggingLeft = true;
@@ -80,10 +88,8 @@ export class SwipeCardsComponent implements OnInit {
     this.card.attempts += 1;
     this.card.lastAccessed = new Date();
     if (this.swipeDirection === 'left') {
-      console.log('left')
       this.card.score = this.card.score - 1;
     } else if (this.swipeDirection === 'right') {
-      console.log('right')
       this.card.score = this.card.score + 1;
     }
     await db.deck.update(this.card.id as number, this.card);
@@ -93,7 +99,6 @@ export class SwipeCardsComponent implements OnInit {
   toggleFlip() {
     this.isFlipped = !this.isFlipped;
   }
-
 
   showAnimation(side: any) {
     const feedbackDiv = this.renderer.createElement('div');

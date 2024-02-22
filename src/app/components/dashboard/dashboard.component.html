@@ -10,4 +10,4 @@
   </div>
 </div>
 
-<button (click)="openAddDialog()" mat-raised-button color="primary" class="btn-practice">Practice!</button>
+<button (click)="openAddDialog()" mat-raised-button color="primary" class="btn-practice" [disabled]="toLearn <= 0">Practice!</button>

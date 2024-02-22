@@ -4,7 +4,7 @@ html, body { margin: 0; padding: 0; background-color: #424242; }
 body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-.mat-mdc-dialog-surface {
+.card-panel .mat-mdc-dialog-surface {
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -13,5 +13,7 @@ body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 
 
 .cdk-global-overlay-wrapper {
-  background-color: #252525c8;
+  background-color: #252525c8 !important;
 }
+
+

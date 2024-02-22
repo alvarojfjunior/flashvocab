@@ -1,5 +1,5 @@
 // src/app/swipe-cards/swipe-cards.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { liveQuery } from 'dexie';
 import { Deck, db } from '../../services/app-db/app-db.service';
 import Speech from 'speak-tts';
@@ -9,14 +9,18 @@ import Speech from 'speak-tts';
   templateUrl: './swipe-cards.component.html',
   styleUrls: ['./swipe-cards.component.css'],
 })
+
 export class SwipeCardsComponent implements OnInit {
   cards$ = liveQuery(() => db.deck.toArray());
   card: Deck;
   swipeDirection: string | null = null;
   isFlipped = false;
+  isDraggingLeft: boolean = false;
+  isDraggingRight: boolean = false;
+
   private speech: any;
 
-  constructor() {
+  constructor(private renderer: Renderer2, private el: ElementRef) {
     this.card = {
       id: 0,
       answer: '',
@@ -52,22 +56,34 @@ export class SwipeCardsComponent implements OnInit {
     });
   }
 
-  async onPan(event: any) {
-    if (event.isFinal) {
-      await this.handleCardSwipe();
-      return;
+  async onSwipe(swipeDirection: 'left' | 'right') {
+    this.showAnimation(swipeDirection)
+
+    if (swipeDirection === 'left') {
+      this.isDraggingLeft = true;
+      setTimeout(() => {
+        this.isDraggingLeft = false;
+      }, 1000);
+    } else if (swipeDirection === 'right') {
+      this.isDraggingRight = true;
+      setTimeout(() => {
+        this.isDraggingRight = false;
+      }, 1000);
     }
-    const x = event.deltaX;
-    this.swipeDirection = x < 0 ? 'left' : 'right';
+
+    this.swipeDirection = swipeDirection;
+
+    this.handleCardSwipe();
   }
 
   async handleCardSwipe() {
-    console.log('Swiped')
     this.card.attempts += 1;
     this.card.lastAccessed = new Date();
     if (this.swipeDirection === 'left') {
+      console.log('left')
       this.card.score = this.card.score - 1;
     } else if (this.swipeDirection === 'right') {
+      console.log('right')
       this.card.score = this.card.score + 1;
     }
     await db.deck.update(this.card.id as number, this.card);
@@ -75,7 +91,19 @@ export class SwipeCardsComponent implements OnInit {
   }
 
   toggleFlip() {
-    console.log('Fliped')
     this.isFlipped = !this.isFlipped;
+  }
+
+
+  showAnimation(side: any) {
+    const feedbackDiv = this.renderer.createElement('div');
+    this.renderer.addClass(feedbackDiv, 'feedback');
+    const text = this.renderer.createText(side === 'right' ? '😎' : '💔');
+    this.renderer.appendChild(feedbackDiv, text);
+    this.renderer.appendChild(this.el.nativeElement, feedbackDiv);
+
+    setTimeout(() => {
+      this.renderer.removeChild(this.el.nativeElement, feedbackDiv);
+    }, 1000);
   }
 }

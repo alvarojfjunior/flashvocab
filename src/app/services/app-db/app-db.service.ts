@@ -25,8 +25,8 @@ export class AppDbService extends Dexie {
 
   async populate() {
     return await db.deck.add({
-      ask: "It is your first card",
-      answer: 'Flash Vocab is amazing!',
+      ask: "Fash Vocab",
+      answer: 'An amazing app to lear a new language!',
       score: 0,
       lastAccessed: new Date(),
       attempts: 0,

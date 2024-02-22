@@ -1,11 +1,3 @@
-.swipe-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: transparent;
-}
-
 .card {
   position: absolute;
   width: 300px;
@@ -15,53 +7,92 @@
   background-color: white;
   perspective: 1000px;
   transform-style: preserve-3d;
-  transition: transform 0.5s;
+  transition: transform 0.8s;
   cursor: pointer;
-}
-
-.card-content {
-  height: 380px;
-  margin: auto;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.card .label-type {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  text-align: center;
+}
+
+.card .text {
+  margin: auto;
   font-size: 20px;
   font-weight: bold;
-  color: #404040;
+}
+
+.btn-left,
+.btn-right {
+  color: white;
+  padding: 15px;
+  padding-right: 20px;
+  border-radius: 50%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  transition: transform 0.5s;
+}
+
+.btn-left {
+  background-color: rgba(87, 13, 0, 0.497);
+}
+
+.btn-right {
+  background-color: rgba(0, 87, 0, 0.497);
+}
+
+.btn-left:hover,
+.btn-right:hover {
+  transform: scale(1.2);
 }
 
 .card.flipped {
   transform: rotateY(180deg);
 }
 
-.card .card-info {
-  padding: 10px;
-}
-
-
-.swipe-left {
-  background-color: rgba(255, 83, 83, 0.34);
-  transform: translateX(-150%) rotate(-15deg);
-}
-
-.swipe-right {
-  background-color: rgba(83, 255, 83, 0.34);
-  transform: translateX(150%) rotate(15deg);
-}
-
-.playPauseButton {
-  background: none;
-  border: none;
-  color: #3498db;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 0;
-}
-
 .glassed {
   transform: rotateY(180deg);
 }
 
-.hidden {
-  visibility: hidden;
+.card.dragging-left {
+  animation: change-card 1s;
+}
+
+.card.dragging-right {
+  animation: change-card 1s;
+}
+
+@keyframes change-card {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.feedback {
+  position: fixed;
+  font-size: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: feedback 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes feedback {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
 }

@@ -1,12 +1,14 @@
-<div mat-dialog-content class="mat-typography swipe-container" (pan)="onPan($event)">
-  <div class="card" [class.flipped]="isFlipped" (click)="toggleFlip()"
-    [ngClass]="{'swipe-left': swipeDirection === 'left', 'swipe-right': swipeDirection === 'right'}">
-    <div class="card-info">
-      <div class="card-content">
-        <div style="text-align: center;">
-          <p [ngClass]="{'glassed' : isFlipped}">{{ isFlipped ? card.answer : card.ask }}</p>
-          <button (click)="play()" class="playPauseButton" [ngClass]="{'hidden' : isFlipped}">Play</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="card"
+  [ngClass]="{ 'flipped': isFlipped, 'dragging-left': isDraggingLeft, 'dragging-right': isDraggingRight }"
+  (click)="toggleFlip()">
+  <p class="label-type" [ngClass]="{'glassed' : isFlipped}"> {{ isFlipped ? "Here is the answer, did you remember?"
+    :'Can you remember it?' }} </p>
+
+  <mat-icon class="btn-right" *ngIf="isFlipped" matPrefix
+    (click)="onSwipe('right')">thumb_up</mat-icon>
+
+  <p class="text" [ngClass]="{'glassed' : isFlipped}">{{ isFlipped ? card.answer : card.ask }}</p>
+
+  <mat-icon class="btn-left" *ngIf="isFlipped" matPrefix
+    (click)="onSwipe('left')">thumb_down</mat-icon>
+</div>
